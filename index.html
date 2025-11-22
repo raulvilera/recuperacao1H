@@ -362,423 +362,372 @@
 
    
 <script>
-/* ============================================================
-   CONSTANTES / CONFIG
-   ============================================================ */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhnHCa5l5o258-izyGKEiw9YRCDStTTX_npnMODR78dccza9mLDuwNiUHshZIOTOea/exec";
+        /* ============================================================
+           CONFIGURAÇÕES GERAIS
+           ============================================================ */
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhnHCa5l5o258-izyGKEiw9YRCDStTTX_npnMODR78dccza9mLDuwNiUHshZIOTOea/exec";
 
-/* ============================================================
-   LISTA DE ALUNOS
-   ============================================================ */
-const students = {
-  "1ª Série H": [
-    { number: "1", name: "ALEXANDRE BATISTA DOS SANTOS" },
-    { number: "5", name: "ANA LÍVIA BRAGA DOS SANTOS" },
-    { number: "11", name: "DANIELLE OLIVEIRA DA SILVA NUNES" },
-    { number: "14", name: "ELOYSA ANDRADE OLIVEIRA SILVA" },
-    { number: "18", name: "FELIPE MARCONDES SILVA" },
-    { number: "19", name: "GEOVANA FERREIRA DA SILVA SOUZA" },
-    { number: "20", name: "GEOVANNA GABRIELA PIERRE SILVA" },
-    { number: "24", name: "ISAAK ALVAREZ MARQUEZ CAETANO" },
-    { number: "33", name: "KEMILLY VITORIA RODRIGUES MARIANO" },
-    { number: "34", name: "LAURA LUIZA DOS SANTOS ALMEIDA" },
-    { number: "37", name: "MARIA EDUARDA VENCESLAU DE SOUZA" },
-    { number: "38", name: "MATHEUS CAVALCANTE LISBOA" },
-    { number: "40", name: "MURILLO SOUZA RODRIGUES DOS SANTOS" },
-    { number: "45", name: "PEDRO HENRIQUE MAURICIO DA SILVA CHAGAS" },
-    { number: "48", name: "RHUAN LIMA OLIVEIRA" },
-    { number: "49", name: "THAINA FIDELIS XAVIER DA SILVA" },
-    { number: "54", name: "DENIS CASTRO DURVALDO" },
-    { number: "56", name: "ISAAC LEMOS SANTOS" },
-    { number: "57", name: "EMILLY EDUARDA BONIFACIO DE AMORIM CORREA" },
-    { number: "59", name: "LEONARDO ABADE DA SILVA DANTAS" },
-    { number: "62", name: "PYETRA GOMES MARTINS" },
-    { number: "64", name: "CARLOS EDUARDO MARTINS DA SILVA" },
-    { number: "66", name: "STELLA MARTINS DA SILVA" },
-    { number: "67", name: "DYESSICA MAYARA DOS SANTOS GOMES" },
-    { number: "68", name: "LARISSA DE LOURDES DOS SANTOS" },
-    { number: "70", name: "GUSTAVO RODRIGUES DE SOUZA" },
-    { number: "72", name: "NAYARA BARROS DE MORAIS" },
-    { number: "73", name: "VITÓRIA SANTOS TEIXEIRA" },
-    { number: "75", name: "JOÃO PAULO RODRIGUES DE SOUZA FILHO" },
-    { number: "76", name: "MARIA EDUARDA DE OLIVEIRA RODRIGUES" },
-    { number: "77", name: "LUIZ HENRIQUE JESUS DOS SANTOS FABRICIO" },
-    { number: "78", name: "EDUARDO CARRASCOSA PINTOR" },
-    { number: "79", name: "GUILHERME DANIEL VELOSO DOS SANTOS" },
-    { number: "80", name: "JOAO GABRIEL AMORIM TOBIAS" },
-    { number: "81", name: "RIAN SANTOS MACHADO" },
-    { number: "82", name: "JULIA ARAUJO DE LIMA" },
-    { number: "83", name: "BRENDA ROSA DA SILVA" },
-    { number: "84", name: "CAMILA APPOLINÁRIO" },
-    { number: "85", name: "ARTHUR CASTRO SILVA" },
-    { number: "86", name: "KAMILA NEVES BRITO" }
-  ]
-};
+        /* ============================================================
+           LISTA COMPLETA DE ALUNOS
+           ============================================================ */
 
-/* ============================================================
-   QUESTÕES (texto, imagem opcional, alternativas com flag 'correct')
-   ============================================================ */
-const questions = [
-  {
-    id: 1,
-    question: "Em 2023, paleontólogos brasileiros anunciaram a descoberta de fósseis de estromatólitos com 2,4 bilhões de anos na região da Serra do Espinhaço... Por que as cianobactérias foram capazes de transformar radicalmente a atmosfera terrestre primitiva?",
-    image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjez1FXJB-OBbaaOnlERIXjAKVVePF0innTJ_vRkOPWNy1hh00YFDm8rrjI0AqR4nbXxCmLd3tp7bsdcjETSp7Rn1PGUkB_ldd71S7zq7nY9sLBTnodDZHzZA89lcEBUqjYfeJN45YnszrzzJZfY8_Dje6P6vqm-8s4GhKEllRguUg3yeR8LzSvT4rOStHm/s450/Capturar.JPG",
-    options: [
-      { text: "Por serem organismos autótrofos fotossintetizantes, liberavam oxigênio como subproduto metabólico, permitindo a oxigenação progressiva da atmosfera e possibilitando o surgimento de organismos aeróbicos.", correct: true },
-      { text: "Por possuírem capacidade de fixação de nitrogênio atmosférico, enriqueceram os solos primitivos com compostos nitrogenados essenciais para o desenvolvimento de outras formas de vida.", correct: false },
-      { text: "Por apresentarem reprodução sexuada, garantiam variabilidade genética que permitia rápida adaptação às condições ambientais em constante mudança no planeta primitivo.", correct: false },
-      { text: "Por formarem associações simbióticas com fungos primitivos, criavam os primeiros ecossistemas complexos que sustentavam cadeias alimentares incipientes.", correct: false }
-    ]
-  },
-  {
-    id: 2,
-    question: "Experimento com fatias de batata em soluções com diferentes concentrações de sal — quais as implicações fisiológicas para plantas em solos salinizados?",
-    image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhliX-oWUrgpMsuUHI7_rGJzL81yY8DVq-tiaHtj3V-rPtwGyydXZP2iPlfji6R2JXD7k6DQM_v-tSSoBpTyCqu5UH54z73DKt4i31xT9eIYJLChM_iCj47vmVblrHsJmvFnCFaoJdow4XgbiNn9pEG9wEti97DAKAcPmTcyPouNbrbQJEnatjpWAtlKEKJ/s450/Capturar.JPG",
-    options: [
-      { text: "Em solos salinizados (hipertônicos), as plantas perdem água por osmose, podendo sofrer desidratação severa e plasmólise, o que explica a dificuldade de cultivo agrícola em áreas com alta concentração de sais.", correct: true },
-      { text: "A turgescência celular em ambientes hipotônicos é prejudicial às plantas porque causa ruptura da parede celular devido ao excessivo influxo de sais minerais através de transporte ativo.", correct: false },
-      { text: "As alterações de volume observadas resultam principalmente da difusão facilitada de íons através de proteínas carreadoras, que respondem às variações no potencial elétrico da membrana.", correct: false },
-      { text: "O fenômeno demonstra a capacidade das células vegetais de realizar fagocitose seletiva, absorvendo ou expelindo água conforme a concentração do meio externo para manter seu volume constante.", correct: false }
-    ]
-  },
-  {
-    id: 3,
-    question: "Linhagem bacteriana com potencial para transformar resíduos agroindustriais em bioplásticos — como as características morfológicas e metabólicas favorecem esse uso?",
-    image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKfgtpuEIx2hbm5A2aSJfff2VI_pcIcXNJhGcVN5T3tCbg6jj9fYKkg2ea1gdbg4DMivuZPcsY19TY0yrzQ3SgWFmK2tYggW6NtG3NehYXaWLMvKX_YmIbxAVxZQDgEBq_FyfdpQeS1Gc8GVb4jiZyVZc6Yl718zPy0RZL4dkpr9fbNMR5_2b6JwQcLxP8/s450/Capturar.JPG",
-    options: [
-      { text: "A forma bacilar aumenta a relação superfície/volume, facilitando a absorção de nutrientes; o metabolismo fermentativo permite transformar resíduos orgânicos em polímeros sem necessidade de oxigênio, viabilizando processos industriais em condições controladas.", correct: true },
-      { text: "A capacidade de esporulação, comum em bactérias com essa morfologia, garante resistência a condições adversas, mas reduz a eficiência dos processos fermentativos por consumir energia destinada à produção de biopolímeros.", correct: false },
-      { text: "Bactérias com metabolismo exclusivamente aeróbio seriam mais adequadas, pois a respiração celular gera maior quantidade de ATP, acelerando a síntese de bioplásticos em reatores aerados continuamente.", correct: false },
-      { text: "A forma cocoide seria mais vantajosa por permitir maior compactação em biorreatores, aumentando a densidade celular e consequentemente a produtividade do processo biotecnológico.", correct: false }
-    ]
-  },
-  {
-    id: 4,
-    question: "Aspergillus tubingensis degrada poliuretano rapidamente — qual o potencial ecológico e tecnológico dessa descoberta?",
-    options: [
-      { text: "Os fungos realizam digestão extracelular através de enzimas hidrolíticas que degradam macromoléculas complexas no ambiente, podendo ser aplicados em estratégias de biorremediação para decompor plásticos em componentes menos nocivos.", correct: true },
-      { text: "A capacidade fotossintética dos fungos permite fixar CO₂ atmosférico enquanto degradam plásticos, gerando um balanço positivo de oxigênio que compensa os impactos ambientais da poluição por polímeros sintéticos.", correct: false },
-      { text: "Por serem organismos autótrofos quimiossintetizantes, os fungos transformam plásticos em biomassa sem consumir outros recursos orgânicos, criando um ciclo sustentável de aproveitamento de resíduos.", correct: false },
-      { text: "A reprodução sexuada dos fungos por esporulação garante variabilidade genética que acelera a evolução de linhagens ainda mais eficientes na degradação de diferentes tipos de polímeros em condições naturais.", correct: false }
-    ]
-  },
-  {
-    id: 5,
-    question: "Leveduras GM fermentando glicose e xilose para produzir etanol de 2ª geração — quais as vantagens biotecnológicas?",
-    options: [
-      { text: "A capacidade de fermentar tanto pentoses quanto hexoses maximiza o aproveitamento da biomassa vegetal, aumentando o rendimento do processo e reduzindo custos, além de valorizar resíduos agrícolas que seriam descartados.", correct: true },
-      { text: "A fermentação alcoólica é menos eficiente energeticamente que a respiração aeróbia, mas produz etanol com maior pureza, eliminando a necessidade de etapas posteriores de destilação e desidratação do biocombustível.", correct: false },
-      { text: "O processo fermentativo consome mais ATP do que gera, exigindo suplementação energética contínua que inviabiliza economicamente a produção em larga escala de biocombustíveis a partir de resíduos lignocelulósicos.", correct: false },
-      { text: "Leveduras selvagens já possuem naturalmente a capacidade de metabolizar todos os açúcares presentes na biomassa, tornando desnecessário o desenvolvimento de linhagens geneticamente modificadas para esse fim específico.", correct: false }
-    ]
-  },
-  {
-    id: 6,
-    question: "A descoberta da penicilina por Fleming — qual a interpretação ecológica e aplicada dessa descoberta?",
-    options: [
-      { text: "Fungos produzem antibióticos como metabólitos secundários para inibir o crescimento de bactérias competidoras no ambiente, uma estratégia ecológica que foi aproveitada para desenvolver medicamentos que salvam milhões de vidas.", correct: true },
-      { text: "A produção de penicilina é um mecanismo de defesa contra predadores animais que se alimentam de fungos, tendo sua ação antibacteriana descoberta fortuitamente durante investigações sobre toxicidade para mamíferos.", correct: false },
-      { text: "Antibióticos como a penicilina são produtos primários do metabolismo energético dos fungos, essenciais para seu crescimento, mas que apresentam efeito colateral de inibição do desenvolvimento de populações bacterianas.", correct: false },
-      { text: "A capacidade de produzir substâncias antibacteriana é exclusiva de fungos parasitas que infectam tecidos animais, evoluindo como mecanismo para suprimir o sistema imune dos hospedeiros durante o processo infeccioso.", correct: false }
-    ]
-  },
-  {
-    id: 7,
-    question: "Micorrizas: qual o significado evolutivo da associação entre plantas e fungos?",
-    options: [
-      { text: "As micorrizas aumentam drasticamente a superfície de absorção radicular, facilitando a aquisição de água e nutrientes pouco móveis como fósforo, o que foi crucial para a colonização do ambiente terrestre pelas plantas há mais de 400 milhões de anos.", correct: true },
-      { text: "A associação micorrízica permite que as plantas realizem fotossíntese com maior eficiência devido aos pigmentos acessórios dos fungos que absorvem comprimentos de onda luminosa não utilizados pelos cloroplastos.", correct: false },
-      { text: "Fungos micorrízicos fixam nitrogênio atmosférico, tornando-o disponível para as plantas em forma de amônio, reduzindo a dependência de bactérias fixadoras como Rhizobium em ecossistemas naturais e agrícolas.", correct: false },
-      { text: "As plantas fornecem aminoácidos essenciais aos fungos simbiontes, que por sua vez sintetizam vitaminas do complexo B, estabelecendo uma complementaridade nutricional que aumenta a resistência a estresses bióticos e abióticos.", correct: false }
-    ]
-  },
-  {
-    id: 8,
-    question: "Bomba Na+/K+ ATPase — implicações fisiológicas para neurônios e transmissão nervosa?",
-    options: [
-      { text: "A bomba estabelece um gradiente de concentração com alta [K+] intracelular e alta [Na+] extracelular, criando um potencial de membrana negativo em repouso essencial para a excitabilidade neuronal e a transmissão sináptica.", correct: true },
-      { text: "O transporte ativo de Na+ para dentro e K+ para fora da célula gera um potencial de membrana positivo que facilita a liberação de neurotransmissores nas terminações axonais durante a propagação do impulso nervoso.", correct: false },
-      { text: "A Na+/K+ ATPase funciona como um canal iônio regulado por voltagem, alternando entre estados abertos e fechados conforme o potencial de membrana, sem consumir ATP diretamente em seu mecanismo de ação.", correct: false },
-      { text: "Este mecanismo mantém equilíbrio osmótico através do transporte conjunto de água junto com os íons, prevenindo alterações de volume celular que poderiam comprometer a integridade estrutural dos neurônios.", correct: false }
-    ]
-  },
-  {
-    id: 9,
-    question: "Líquens como bioindicadores — por que são sensíveis a poluentes atmosféricos?",
-    options: [
-      { text: "O fungo fornece proteção e retenção de umidade, enquanto o fotobionte realiza fotossíntese produzindo carboidratos; a ausência de estruturas de proteção torna os líquens sensíveis a poluentes que danificam suas células e rompem a simbiose.", correct: true },
-      { text: "Líquens são pioneiros na sucessão ecológica porque o fungo fixa nitrogênio atmosférico enquanto a alga produz antibióticos que eliminam competidores, estratégia comprometida por poluentes que inibem a atividade antimicrobiana.", correct: false },
-      { text: "A simbiose permite que líquens sobrevivem em ambientes extremos porque o fungo realiza quimiossíntese oxidando compostos inorgânicos, enquanto a alga fornece vitaminas essenciais; poluentes interferem nesses processos metabólicos complementares.", correct: false },
-      { text: "Líquens são tolerantes à poluição porque acumulam metais pesados em vacúolos especializados, funcionando como fitoestabilizadores naturais; seu desaparecence indica saturação da capacidade de armazenamento desses poluentes.", correct: false }
-    ]
-  },
-  {
-    id: 10,
-    question: "Proteínas à base de micélio — qual o potencial dessa tecnologia para sustentabilidade alimentar?",
-    options: [
-      { text: "O micélio vegetativo cresce rapidamente em substratos de baixo custo como resíduos agroindustriais, pode ser processado para obter texturas variadas e possui menor impacto ambiental que a pecuária tradicional, representando alternativa sustentável para segurança alimentar.", correct: true },
-      { text: "Fungos produzem naturalmente colesterol e gorduras saturadas em quantidades similares às carnes vermelhas, mantendo características sensoriais familiares aos consumidores mas sem os benefícios nutricionais de proteínas vegetais convencionais.", correct: false },
-      { text: "O cultivo de micélio para alimentação requer condições estéreis e substratos nobres como grãos selecionados, tornando o processo energeticamente mais dispendioso que a produção de proteínas animais em sistemas intensivos convencionais.", correct: false },
-      { text: "Proteínas fúngicas carecem de aminoácidos essenciais como lisina e metionina, necessitando fortificação com suplementos sintéticos que reduzem a sustentabilidade do produto final em comparação com fontes proteicas tradicionais.", correct: false }
-    ]
-  }
-];
+        const students = {
+            "1ª Série H": [
+                { number: "1", name: "ALEXANDRE BATISTA DOS SANTOS" },
+                { number: "5", name: "ANA LÍVIA BRAGA DOS SANTOS" },
+                { number: "11", name: "DANIELLE OLIVEIRA DA SILVA NUNES" },
+                { number: "14", name: "ELOYSA ANDRADE OLIVEIRA SILVA" },
+                { number: "18", name: "FELIPE MARCONDES SILVA" },
+                { number: "19", name: "GEOVANA FERREIRA DA SILVA SOUZA" },
+                { number: "20", name: "GEOVANNA GABRIELA PIERRE SILVA" },
+                { number: "24", name: "ISAAK ALVAREZ MARQUEZ CAETANO" },
+                { number: "33", name: "KEMILLY VITORIA RODRIGUES MARIANO" },
+                { number: "34", name: "LAURA LUIZA DOS SANTOS ALMEIDA" },
+                { number: "37", name: "MARIA EDUARDA VENCESLAU DE SOUZA" },
+                { number: "38", name: "MATHEUS CAVALCANTE LISBOA" },
+                { number: "40", name: "MURILLO SOUZA RODRIGUES DOS SANTOS" },
+                { number: "45", name: "PEDRO HENRIQUE MAURICIO DA SILVA CHAGAS" },
+                { number: "48", name: "RHUAN LIMA OLIVEIRA" },
+                { number: "49", name: "THAINA FIDELIS XAVIER DA SILVA" },
+                { number: "54", name: "DENIS CASTRO DURVALDO" },
+                { number: "56", name: "ISAAC LEMOS SANTOS" },
+                { number: "57", name: "EMILLY EDUARDA BONIFACIO DE AMORIM CORREA" },
+                { number: "59", name: "LEONARDO ABADE DA SILVA DANTAS" },
+                { number: "62", name: "PYETRA GOMES MARTINS" },
+                { number: "64", name: "CARLOS EDUARDO MARTINS DA SILVA" },
+                { number: "66", name: "STELLA MARTINS DA SILVA" },
+                { number: "67", name: "DYESSICA MAYARA DOS SANTOS GOMES" },
+                { number: "68", name: "LARISSA DE LOURDES DOS SANTOS" },
+                { number: "70", name: "GUSTAVO RODRIGUES DE SOUZA" },
+                { number: "72", name: "NAYARA BARROS DE MORAIS" },
+                { number: "73", name: "VITÓRIA SANTOS TEIXEIRA" },
+                { number: "75", name: "JOÃO PAULO RODRIGUES DE SOUZA FILHO" },
+                { number: "76", name: "MARIA EDUARDA DE OLIVEIRA RODRIGUES" },
+                { number: "77", name: "LUIZ HENRIQUE JESUS DOS SANTOS FABRICIO" },
+                { number: "78", name: "EDUARDO CARRASCOSA PINTOR" },
+                { number: "79", name: "GUILHERME DANIEL VELOSO DOS SANTOS" },
+                { number: "80", name: "JOAO GABRIEL AMORIM TOBIAS" },
+                { number: "81", name: "RIAN SANTOS MACHADO" },
+                { number: "82", name: "JULIA ARAUJO DE LIMA" },
+                { number: "83", name: "BRENDA ROSA DA SILVA" },
+                { number: "84", name: "CAMILA APPOLINÁRIO" },
+                { number: "85", name: "ARTHUR CASTRO SILVA" },
+                { number: "86", name: "KAMILA NEVES BRITO" }
+            ]
+        };
 
-/* ============================================================
-   UTILITÁRIOS
-   ============================================================ */
-function showResult(msg, type="success"){
-  const box = document.getElementById("statusBox");
-  box.style.display = "block";
-  box.className = "result " + (type === "error" ? "error" : "success");
-  box.innerHTML = msg;
-}
-function hideResult(){
-  const box = document.getElementById("statusBox");
-  box.style.display = "none";
-  box.innerHTML = "";
-}
-function safeNumber(v){
-  if (v === undefined || v === null || v === "") return "";
-  const n = Number(String(v).replace(",","."));
-  return Number.isFinite(n) ? n : "";
-}
+        /* ============================================================
+           QUESTÕES DO TESTE - COM MAIOR CONTEXTUALIZAÇÃO
+           ============================================================ */
 
-/* ============================================================
-   RENDERIZAÇÃO
-   ============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  const select = document.getElementById("studentName");
-  const num = document.getElementById("studentNumber");
-  const grade = document.getElementById("studentGrade");
-  const container = document.getElementById("questionsContainer");
-  const dateField = document.getElementById("currentDate");
+        const questions = [
+            {
+                id: 1,
+                question: "Em 2023, paleontólogos brasileiros anunciaram a descoberta de fósseis de estromatólitos com 2,4 bilhões de anos na região da Serra do Espinhaço, considerados os primeiros registros de vida no território que hoje é o Brasil. Estes fósseis são estruturas rochosas formadas pela ação de cianobactérias, organismos procariontes que realizavam fotossíntese. Considerando a evolução celular e as características fundamentais dos seres vivos, qual afirmação melhor explica por que as cianobactérias, apesar de sua simplicidade estrutural, foram capazes de transformar radicalmente a atmosfera terrestre primitiva?",
+                image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjez1FXJB-OBbaaOnlERIXjAKVVePF0innTJ_vRkOPWNy1hh00YFDm8rrjI0AqR4nbXxCmLd3tp7bsdcjETSp7Rn1PGUkB_ldd71S7zq7nY9sLBTnodDZHzZA89lcEBUqjYfeJN45YnszrzzJZfY8_Dje6P6vqm-8s4GhKEllRguUg3yeR8LzSvT4rOStHm/s450/Capturar.JPG",
+                options: [
+                    { text: "Por serem organismos autótrofos fotossintetizantes, liberavam oxigênio como subproduto metabólico, permitindo a oxigenação progressiva da atmosfera e possibilitando o surgimento de organismos aeróbicos.", correct: true },
+                    { text: "Por possuírem capacidade de fixação de nitrogênio atmosférico, enriqueceram os solos primitivos com compostos nitrogenados essenciais para o desenvolvimento de outras formas de vida.", correct: false },
+                    { text: "Por apresentarem reprodução sexuada, garantiam variabilidade genética que permitia rápida adaptação às condições ambientais em constante mudança no planeta primitivo.", correct: false },
+                    { text: "Por formarem associações simbióticas com fungos primitivos, criavam os primeiros ecossistemas complexos que sustentavam cadeias alimentares incipientes.", correct: false }
+                ]
+            },
+            {
+                id: 2,
+                question: "Um grupo de estudantes realizou um experimento para observar os efeitos da osmose em células vegetais. Eles colocaram fatias de batata em três soluções com diferentes concentrações de sal e observaram alterações no volume celular após 30 minutos. Nas soluções hipertônicas, as células murcharam visivelmente, enquanto nas hipotônicas tornaram-se túrgidas. Considerando os mecanismos de transporte através da membrana plasmática e a importância da homeostase para os seres vivos, qual análise explica corretamente as implicações fisiológicas dessas observações para as plantas em ambientes com diferentes concentrações salinas?",
+                image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhliX-oWUrgpMsuUHI7_rGJzL81yY8DVq-tiaHtj3V-rPtwGyydXZP2iPlfji6R2JXD7k6DQM_v-tSSoBpTyCqu5UH54z73DKt4i31xT9eIYJLChM_iCj47vmVblrHsJmvFnCFaoJdow4XgbiNn9pEG9wEti97DAKAcPmTcyPouNbrbQJEnatjpWAtlKEKJ/s450/Capturar.JPG",
+                options: [
+                    { text: "Em solos salinizados (hipertônicos), as plantas perdem água por osmose, podendo sofrer desidratação severa e plasmólise, o que explica a dificuldade de cultivo agrícola em áreas com alta concentração de sais.", correct: true },
+                    { text: "A turgescência celular em ambientes hipotônicos é prejudicial às plantas porque causa ruptura da parede celular devido ao excessivo influxo de sais minerais através de transporte ativo.", correct: false },
+                    { text: "As alterações de volume observadas resultam principalmente da difusão facilitada de íons através de proteínas carreadoras, que respondem às variações no potencial elétrico da membrana.", correct: false },
+                    { text: "O fenômeno demonstra a capacidade das células vegetais de realizar fagocitose seletiva, absorvendo ou expelindo água conforme a concentração do meio externo para manter seu volume constante.", correct: false }
+                ]
+            },
+            {
+                id: 3,
+                question: "Pesquisadores da Embrapa identificaram uma linhagem bacteriana com potencial biotecnológico para transformar resíduos agroindustriais em bioplásticos biodegradáveis. Esta bactéria, isolada de solos da Amazônia, apresenta forma de bastão, é anaeróbia facultativa e possui metabolismo heterotrófico fermentativo. Considerando a diversidade metabólica e morfológica do domínio Bacteria, qual análise integra corretamente essas características com o potencial biotecnológico da descoberta?",
+                image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKfgtpuEIx2hbm5A2aSJfff2VI_pcIcXNJhGcVN5T3tCbg6jj9fYKkg2ea1gdbg4DMivuZPcsY19TY0yrzQ3SgWFmK2tYggW6NtG3NehYXaWLMvKX_YmIbxAVxZQDgEBq_FyfdpQeS1Gc8GVb4jiZyVZc6Yl718zPy0RZL4dkpr9fbNMR5_2b6JwQcLxP8/s450/Capturar.JPG",
+                
+                options: [
+                    { text: "A forma bacilar aumenta a relação superfície/volume, facilitando a absorção de nutrientes; o metabolismo fermentativo permite transformar resíduos orgânicos em polímeros sem necessidade de oxigênio, viabilizando processos industriais em condições controladas.", correct: true },
+                    { text: "A capacidade de esporulação, comum em bactérias com essa morfologia, garante resistência a condições adversas, mas reduz a eficiência dos processos fermentativos por consumir energia destinada à produção de biopolímeros.", correct: false },
+                    { text: "Bactérias com metabolismo exclusivamente aeróbio seriam mais adequadas, pois a respiração celular gera maior quantidade de ATP, acelerando a síntese de bioplásticos em reatores aerados continuamente.", correct: false },
+                    { text: "A forma cocoide seria mais vantajosa por permitir maior compactação em biorreatores, aumentando a densidade celular e consequentemente a produtividade do processo biotecnológico.", correct: false }
+                ]
+            },
+            {
+                id: 4,
+                question: "Cientistas alemães do Instituto de Microbiologia Ambiental identificaram uma espécie de fungo (Aspergillus tubingensis) com capacidade de degradar poliuretano em apenas duas semanas, um processo que naturalmente levaria séculos. Este fungo produz enzimas específicas que quebram as ligações químicas do plástico, utilizando-o como fonte de carbono. Considerando as características exclusivas do reino Fungi e sua importância ecológica, qual análise explica adequadamente o potencial dessa descoberta para enfrentar o problema da poluição por plásticos?",
+                options: [
+                    { text: "Os fungos realizam digestão extracelular através de enzimas hidrolíticas que degradam macromoléculas complexas no ambiente, podendo ser aplicados em estratégias de biorremediação para decompor plásticos em componentes menos nocivos.", correct: true },
+                    { text: "A capacidade fotossintética dos fungos permite fixar CO₂ atmosférico enquanto degradam plásticos, gerando um balanço positivo de oxigênio que compensa os impactos ambientais da poluição por polímeros sintéticos.", correct: false },
+                    { text: "Por serem organismos autótrofos quimiossintetizantes, os fungos transformam plásticos em biomassa sem consumir outros recursos orgânicos, criando um ciclo sustentável de aproveitamento de resíduos.", correct: false },
+                    { text: "A reprodução sexuada dos fungos por esporulação garante variabilidade genética que acelera a evolução de linhagens ainda mais eficientes na degradação de diferentes tipos de polímeros em condições naturais.", correct: false }
+                ]
+            },
+            {
+                id: 5,
+                question: "Uma startup brasileira desenvolveu um processo inovador de produção de etanol de segunda geração utilizando leveduras geneticamente modificadas que fermentam simultaneamente glicose e xilose, os principais açúcares presentes na biomassa lignocelulósica. Considerando os processos metabólicos envolvidos na fermentação e suas aplicações biotecnológicas, qual análise explica corretamente as vantagens dessa abordagem para a produção de biocombustíveis sustentáveis?",
+                options: [
+                    { text: "A capacidade de fermentar tanto pentoses quanto hexoses maximiza o aproveitamento da biomassa vegetal, aumentando o rendimento do processo e reduzindo custos, além de valorizar resíduos agrícolas que seriam descartados.", correct: true },
+                    { text: "A fermentação alcoólica é menos eficiente energeticamente que a respiração aeróbia, mas produz etanol com maior pureza, eliminando a necessidade de etapas posteriores de destilação e desidratação do biocombustível.", correct: false },
+                    { text: "O processo fermentativo consome mais ATP do que gera, exigindo suplementação energética contínua que inviabiliza economicamente a produção em larga escala de biocombustíveis a partir de resíduos lignocelulósicos.", correct: false },
+                    { text: "Leveduras selvagens já possuem naturalmente a capacidade de metabolizar todos os açúcares presentes na biomassa, tornando desnecessário o desenvolvimento de linhagens geneticamente modificadas para esse fim específico.", correct: false }
+                ]
+            },
+            {
+                id: 6,
+                question: "A descoberta acidental da penicilina por Alexander Fleming em 1928 revolucionou a medicina moderna. Ao retornar de férias, Fleming observou que colônias de Staphylococcus aureus próximas a um contaminante fúngico (Penicillium notatum) haviam sido lisadas. Investigando esse fenômeno, ele isolou a substância responsável pelo efeito antibacteriano. Considerando as interações ecológicas e o metabolismo secundário dos fungos, qual interpretação explica adequadamente a importância evolutiva e aplicada dessa descoberta?",
+                options: [
+                    { text: "Fungos produzem antibióticos como metabólitos secundários para inibir o crescimento de bactérias competidoras no ambiente, uma estratégia ecológica que foi aproveitada para desenvolver medicamentos que salvam milhões de vidas.", correct: true },
+                    { text: "A produção de penicilina é um mecanismo de defesa contra predadores animais que se alimentam de fungos, tendo sua ação antibacteriana descoberta fortuitamente durante investigações sobre toxicidade para mamíferos.", correct: false },
+                    { text: "Antibióticos como a penicilina são produtos primários do metabolismo energético dos fungos, essenciais para seu crescimento, mas que apresentam efeito colateral de inibição do desenvolvimento de populações bacterianas.", correct: false },
+                    { text: "A capacidade de produzir substâncias antibacteriana é exclusiva de fungos parasitas que infectam tecidos animais, evoluindo como mecanismo para suprimir o sistema imune dos hospedeiros durante o processo infeccioso.", correct: false }
+                ]
+            },
+            {
+                id: 7,
+                question: "Estudos ecológicos demonstram que mais de 80% das espécies vegetais estabelecem associações mutualísticas com fungos formando micorrizas. Nessa simbiose, as hifas fúngicas funcionam como extensões do sistema radicular, enquanto a planta fornece carboidratos ao fungo. Considerando a coevolução entre plantas e fungos e sua importância para os ecossistemas terrestres, qual análise explica corretamente o significado evolutivo dessa associação?",
+                options: [
+                    { text: "As micorrizas aumentam drasticamente a superfície de absorção radicular, facilitando a aquisição de água e nutrientes pouco móveis como fósforo, o que foi crucial para a colonização do ambiente terrestre pelas plantas há mais de 400 milhões de anos.", correct: true },
+                    { text: "A associação micorrízica permite que as plantas realizem fotossíntese com maior eficiência devido aos pigmentos acessórios dos fungos que absorvem comprimentos de onda luminosa não utilizados pelos cloroplastos.", correct: false },
+                    { text: "Fungos micorrízicos fixam nitrogênio atmosférico, tornando-o disponível para as plantas em forma de amônio, reduzindo a dependência de bactérias fixadoras como Rhizobium em ecossistemas naturais e agrícolas.", correct: false },
+                    { text: "As plantas fornecem aminoácidos essenciais aos fungos simbiontes, que por sua vez sintetizam vitaminas do complexo B, estabelecendo uma complementaridade nutricional que aumenta a resistência a estresses bióticos e abióticos.", correct: false }
+                ]
+            },
+            {
+                id: 8,
+                question: "A bomba de sódio e potássio (Na+/K+ ATPase) é uma proteína integral de membrana fundamental para a fisiologia celular, consumindo cerca de 30% do ATP produzido pelas células nervosas. Este transporte ativo mantém o gradiente eletroquímico necessário para a propagação do impulso nervoso. Considerando os princípios do transporte membranar e a importância da homeostase iônica, qual análise explica corretamente as implicações fisiológicas desse mecanismo?",
+                options: [
+                    { text: "A bomba estabelece um gradiente de concentração com alta [K+] intracelular e alta [Na+] extracelular, criando um potencial de membrana negativo em repouso essencial para a excitabilidade neuronal e a transmissão sináptica.", correct: true },
+                    { text: "O transporte ativo de Na+ para dentro e K+ para fora da célula gera um potencial de membrana positivo que facilita a liberação de neurotransmissores nas terminações axonais durante a propagação do impulso nervoso.", correct: false },
+                    { text: "A Na+/K+ ATPase funciona como um canal iônio regulado por voltagem, alternando entre estados abertos e fechados conforme o potencial de membrana, sem consumir ATP diretamente em seu mecanismo de ação.", correct: false },
+                    { text: "Este mecanismo mantém equilíbrio osmótico através do transporte conjunto de água junto com os íons, prevenindo alterações de volume celular que poderiam comprometer a integridade estrutural dos neurônios.", correct: false }
+                ]
+            },
+            {
+                id: 9,
+                question: "Líquens são associações simbióticas entre fungos (micobiontes) e algas ou cianobactérias (fotobiontes) que colonizam os mais diversos ambientes, desde desertos até regiões polares. Sua sensibilidade a poluentes atmosféricos como dióxido de enxofre os torna bioindicadores valiosos da qualidade do ar. Considerando a natureza dessa simbiose e suas aplicações em monitoramento ambiental, qual análise integra corretamente esses aspectos?",
+                options: [
+                    { text: "O fungo fornece proteção e retenção de umidade, enquanto o fotobionte realiza fotossíntese produzindo carboidratos; a ausência de estruturas de proteção torna os líquens sensíveis a poluentes que danificam suas células e rompem a simbiose.", correct: true },
+                    { text: "Líquens são pioneiros na sucessão ecológica porque o fungo fixa nitrogênio atmosférico enquanto a alga produz antibióticos que eliminam competidores, estratégia comprometida por poluentes que inibem a atividade antimicrobiana.", correct: false },
+                    { text: "A simbiose permite que líquens sobrevivem em ambientes extremos porque o fungo realiza quimiossíntese oxidando compostos inorgânicos, enquanto a alga fornece vitaminas essenciais; poluentes interferem nesses processos metabólicos complementares.", correct: false },
+                    { text: "Líquens são tolerantes à poluição porque acumulam metais pesados em vacúolos especializados, funcionando como fitoestabilizadores naturais; seu desaparecence indica saturação da capacidade de armazenamento desses poluentes.", correct: false }
+                ]
+            },
+            {
+                id: 10,
+                question: "Empresas de biotecnologia têm desenvolvido proteínas alternativas à carne animal utilizando micélio de fungos como matéria-prima. O micélio, quando submetido a condições controladas de crescimento, desenvolve textura fibrosa similar à muscular e apresenta perfil nutricional rico em proteínas, fibras e micronutrientes. Considerando a biologia dos fungos e as demandas por sustentabilidade alimentar, qual análise avalia corretamente o potencial dessa tecnologia?",
+                options: [
+                    { text: "O micélio vegetativo cresce rapidamente em substratos de baixo custo como resíduos agroindustriais, pode ser processado para obter texturas variadas e possui menor impacto ambiental que a pecuária tradicional, representando alternativa sustentável para segurança alimentar.", correct: true },
+                    { text: "Fungos produzem naturalmente colesterol e gorduras saturadas em quantidades similares às carnes vermelhas, mantendo características sensoriais familiares aos consumidores mas sem os benefícios nutricionais de proteínas vegetais convencionais.", correct: false },
+                    { text: "O cultivo de micélio para alimentação requer condições estéreis e substratos nobres como grãos selecionados, tornando o processo energeticamente mais dispendioso que a produção de proteínas animais em sistemas intensivos convencionais.", correct: false },
+                    { text: "Proteínas fúngicas carecem de aminoácidos essenciais como lisina e metionina, necessitando fortificação com suplementos sintéticos que reduzem a sustentabilidade do produto final em comparação com fontes proteicas tradicionais.", correct: false }
+                ]
+            }
+        ];
 
-  // Data atual
-  const today = new Date();
-  dateField.value = today.toLocaleDateString('pt-BR');
+        /* ============================================================
+           MAPEAMENTO DAS RESPOSTAS CORRETAS (OMITIDO DO CÓDIGO FRONTEND)
+           ============================================================ */
+        // As respostas corretas estão definidas apenas no objeto questions acima
+        // através da propriedade 'correct: true' em cada alternativa
 
-  // Monta select com optgroup por turma
-  Object.keys(students).forEach(turma => {
-    const group = document.createElement("optgroup");
-    group.label = turma;
-
-    students[turma].forEach(s => {
-      const opt = document.createElement("option");
-      opt.value = `${s.number}|${turma}|${s.name}`;
-      opt.textContent = `${s.number} — ${s.name}`;
-      group.appendChild(opt);
-    });
-
-    select.appendChild(group);
-  });
-
-  // Monta questões
-  questions.forEach(q => {
-    const block = document.createElement("div");
-    block.className = "question-container";
-    block.id = "q" + q.id;
-
-    const qHtml = document.createElement("div");
-    qHtml.innerHTML = `<p class="question"><strong>Questão ${q.id}:</strong> ${q.question}</p>`;
-    block.appendChild(qHtml);
-
-    if (q.image){
-      const img = document.createElement("img");
-      img.src = q.image;
-      img.className = "question-image";
-      img.alt = `Imagem da questão ${q.id}`;
-      block.appendChild(img);
-    }
-
-    const optBox = document.createElement("div");
-    optBox.className = "options";
-    q.options.forEach((opt, idx) => {
-      const letter = String.fromCharCode(65 + idx);
-      const optionDiv = document.createElement("div");
-      optionDiv.className = "option";
-      optionDiv.tabIndex = 0;
-      optionDiv.dataset.question = q.id;
-      optionDiv.dataset.letter = letter;
-      optionDiv.textContent = `${letter}) ${opt.text}`;
-
-      optionDiv.addEventListener("click", () => {
-        // toggle selection exclusive
-        optBox.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
-        optionDiv.classList.add("selected");
-        hideResult();
-      });
-
-      optionDiv.addEventListener("keypress", (ev) => {
-        if (ev.key === "Enter" || ev.key === " ") {
-          ev.preventDefault();
-          optionDiv.click();
+        /* ============================================================
+           EXIBIÇÃO DE MENSAGENS
+           ============================================================ */
+        function showResult(msg, type) {
+            const el = document.getElementById("resultMessage");
+            el.innerHTML = msg;
+            el.className = "result " + type;
+            el.style.display = "block";
         }
-      });
+        
+        function hideResult() {
+            document.getElementById("resultMessage").style.display = "none";
+        }
 
-      optBox.appendChild(optionDiv);
-    });
+        /* ============================================================
+           ENVIO PARA O APPS SCRIPT
+           ============================================================ */
+        async function sendToGoogle(dataObj) {
+            try {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbzhnHCa5l5o258-izyGKEiw9YRCDStTTX_npnMODR78dccza9mLDuwNiUHshZIOTOea/exec", {
+                    method: "POST",
+                    body: JSON.stringify(dataObj)
+                });
 
-    block.appendChild(optBox);
-    container.appendChild(block);
-  });
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status} ${response.statusText}`);
+                }
 
-  select.addEventListener("change", () => {
-    if (!select.value) {
-      num.value = "";
-      grade.value = "";
-      return;
-    }
-    const [studentNumber, studentGrade, studentName] = select.value.split("|");
-    num.value = studentNumber;
-    grade.value = studentGrade;
-    hideResult();
-  });
+                const json = await response.json();
 
-  document.getElementById("clearBtn").addEventListener("click", () => {
-    document.querySelectorAll(".option.selected").forEach(o => o.classList.remove("selected"));
-    document.getElementById("submitBtn").disabled = false;
-    hideResult();
-  });
-});
+                if (json.status === "success") {
+                    showResult(`<strong>Sucesso!</strong> Dados enviados e registrados. Sua pontuação: ${dataObj.finalScore}/10 (${dataObj.percentage}%)`, "success");
+                    document.getElementById("submitBtn").disabled = true;
+                } else {
+                    showResult(
+                        "<strong>Erro no servidor:</strong> " + (json.message || "Resposta inesperada do Apps Script."),
+                        "error"
+                    );
+                }
+            } catch (e) {
+                showResult(
+                    "<strong>Erro de Conexão:</strong> " + e.message + ". Verifique sua conexão com a internet.",
+                    "error"
+                );
+            }
+        }
 
-/* ============================================================
-   ENVIO: função robusta com timeout e parsing
-   ============================================================ */
-async function sendToGoogle(dataObj, timeoutMs = 15000) {
-  // AbortController para timeout
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+        /* ============================================================
+           RENDERIZAÇÃO DE ALUNOS + QUESTÕES
+           ============================================================ */
 
-  try {
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(dataObj),
-      signal: controller.signal,
-      credentials: "omit" // não envia cookies
-    });
+        document.addEventListener("DOMContentLoaded", () => {
+            const select = document.getElementById("studentName");
+            const num = document.getElementById("studentNumber");
+            const grade = document.getElementById("studentGrade");
+            const container = document.getElementById("questionsContainer");
+            const dateField = document.getElementById("currentDate");
+            
+            // Preencher a data atual
+            const today = new Date();
+            dateField.value = today.toLocaleDateString('pt-BR');
 
-    clearTimeout(timeout);
+            // Preencher alunos
+            Object.keys(students).forEach(turma => {
+                const group = document.createElement("optgroup");
+                group.label = turma;
 
-    // tenta ler como JSON, mas prepara mensagem amigável caso não seja JSON
-    const text = await response.text();
-    let json = null;
-    try {
-      json = text ? JSON.parse(text) : null;
-    } catch (parseErr) {
-      // não-JSON recebido
-      if (!response.ok) {
-        throw new Error(`Resposta inválida do servidor (HTTP ${response.status}).`);
-      } else {
-        // resposta 200 mas não JSON -> trata como sucesso parcial
-        return { status: "ok", raw: text };
-      }
-    }
+                students[turma].forEach(s => {
+                    const opt = document.createElement("option");
+                    // O valor deve ser: Nº|Série|Nome
+                    opt.value = `${s.number}|${turma}|${s.name}`;
+                    opt.textContent = s.name;
+                    group.appendChild(opt);
+                });
 
-    return json;
-  } catch (err) {
-    // Diferencia abort (timeout) de outros erros
-    if (err.name === "AbortError") {
-      throw new Error("Tempo de conexão esgotou (timeout). Verifique a internet ou o backend.");
-    } else {
-      throw err;
-    }
-  } finally {
-    clearTimeout(timeout);
-  }
-}
+                select.appendChild(group);
+            });
 
-/* ============================================================
-   LOGICA DE SUBMIT (valida, pontua, envia)
-   ============================================================ */
-document.getElementById("submitBtn").addEventListener("click", async () => {
-  hideResult();
-  const select = document.getElementById("studentName");
-  if (!select.value) {
-    showResult("Selecione seu nome na lista antes de enviar.", "error");
-    return;
-  }
+            // Preencher questões
+            questions.forEach(q => {
+                const block = document.createElement("div");
+                block.className = "question-container";
+                block.id = "q" + q.id;
 
-  const [studentNumber, studentGrade, studentName] = select.value.split("|");
+                block.innerHTML = `
+                    <p class="question"><strong>Questão ${q.id}:</strong> ${q.question}</p>
+                    ${q.image ? `<img src="${q.image}" class="question-image">` : ""}
+                    <div class="options"></div>
+                `;
 
-  const data = {
-    studentName: studentName,
-    studentNumber: studentNumber,
-    studentGrade: studentGrade
-  };
+                const optBox = block.querySelector(".options");
 
-  let correct = 0;
-  let allAnswered = true;
-  const totalQuestions = questions.length;
+                q.options.forEach((opt, idx) => {
+                    const letter = String.fromCharCode(65 + idx);
+                    const div = document.createElement("div");
+                    div.className = "option";
+                    div.dataset.question = q.id;
+                    div.dataset.letter = letter;
+                    div.textContent = opt.text;
 
-  for (const q of questions) {
-    const selected = document.querySelector(`#q${q.id} .option.selected`);
-    if (!selected) { allAnswered = false; break; }
-    const letter = selected.dataset.letter;
-    data[`q${q.id}`] = letter;
+                    div.onclick = () => {
+                        optBox.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+                        div.classList.add("selected");
+                        hideResult();
+                    };
 
-    // verifica se correto
-    const correctIndex = q.options.findIndex(opt => opt.correct);
-    const correctLetter = String.fromCharCode(65 + correctIndex);
-    if (letter === correctLetter) correct++;
-  }
+                    optBox.appendChild(div);
+                });
 
-  if (!allAnswered) {
-    showResult("Responda todas as questões antes de enviar.", "error");
-    return;
-  }
+                container.appendChild(block);
+            });
 
-  // score e porcentagem
-  data.finalScore = correct;
-  data.percentage = Number(((correct / totalQuestions) * 100).toFixed(2));
-  data.timestamp = new Date().toISOString();
+            select.onchange = () => {
+                if (!select.value) {
+                    num.value = "";
+                    return;
+                }
+                // O valor é: Nº|Série|Nome. Precisamos do Nº
+                const [n] = select.value.split("|");
+                num.value = n;
+                hideResult();
+            };
+            
+            // Botão limpar respostas
+            document.getElementById("clearBtn").onclick = () => {
+                document.querySelectorAll(".option.selected").forEach(opt => {
+                    opt.classList.remove("selected");
+                });
+                hideResult();
+                document.getElementById("submitBtn").disabled = false;
+            };
+        });
 
-  // bloqueia botão para evitar múltiplos envios
-  const btn = document.getElementById("submitBtn");
-  btn.disabled = true;
-  showResult(`Processando... você acertou ${correct}/${totalQuestions}. Enviando dados...`, "success");
+        /* ============================================================
+           ENVIO FINAL
+           ============================================================ */
 
-  try {
-    const res = await sendToGoogle(data, 15000); // 15s timeout
+        document.getElementById("submitBtn").onclick = async () => {
+            hideResult();
 
-    // Trata os formatos de resposta mais comuns
-    if (!res) {
-      showResult("Resposta vazia do servidor. Verifique a implantação do Apps Script.", "error");
-      btn.disabled = false;
-      return;
-    }
+            const select = document.getElementById("studentName");
+            if (!select.value) {
+                showResult("Selecione seu nome na lista acima.", "error");
+                return;
+            }
 
-    // Se o servidor retornou objeto com status
-    if (typeof res === "object") {
-      if (res.status === "success" || res.status === "ok") {
-        showResult(`<strong>Sucesso!</strong> Dados registrados. Nota: ${data.finalScore}/${totalQuestions} (${data.percentage}%).`, "success");
-        // mantém botão desabilitado após sucesso
-      } else {
-        // servidor devolveu erro controlado
-        showResult(`<strong>Erro no servidor:</strong> ${res.message || JSON.stringify(res)}`, "error");
-        btn.disabled = false;
-      }
-    } else {
-      // res pode ser {status:"ok"} ou texto bruto
-      if (typeof res === "string") {
-        showResult("Resposta do servidor: " + res, "success");
-      } else {
-        showResult("Resposta inesperada do servidor. Verifique logs no Apps Script.", "error");
-        btn.disabled = false;
-      }
-    }
-  } catch (err) {
-    // Possíveis motivos: timeout, CORS, network offline, URL inválida
-    showResult(`<strong>Erro de Conexão:</strong> ${err.message}. Verifique a URL do Web App, permissões (Qualquer pessoa, mesmo anônima) e sua conexão.`, "error");
-    btn.disabled = false;
-    console.error("Erro ao enviar:", err);
-  }
-});
-</script></body>
+            // O valor é: Nº|Série|Nome
+            const [studentNumber, studentGrade, studentName] = select.value.split("|");
+            
+            // Inicializa o objeto de dados que será enviado
+            const data = { 
+                studentName: studentName, 
+                studentNumber: studentNumber, 
+                studentGrade: studentGrade 
+            };
+
+            let correct = 0;
+            let allAnswered = true;
+            const totalQuestions = questions.length;
+            
+            for (let q of questions) {
+                const selected = document.querySelector(`#q${q.id} .option.selected`);
+                if (!selected) {
+                    allAnswered = false;
+                    break;
+                }
+                const letter = selected.dataset.letter;
+                data[`q${q.id}`] = letter;
+
+                // Verifica se a resposta está correta
+                const questionObj = questions.find(question => question.id === q.id);
+                const correctOptionIndex = questionObj.options.findIndex(opt => opt.correct);
+                const correctLetter = String.fromCharCode(65 + correctOptionIndex);
+                
+                if (letter === correctLetter) correct++;
+            }
+
+            if (!allAnswered) {
+                showResult("Responda todas as questões antes de enviar.", "error");
+                return;
+            }
+
+            data.finalScore = correct;
+            
+            // Calcula a porcentagem
+            data.percentage = (correct / totalQuestions) * 100;
+
+            showResult(`Processando... você acertou ${correct}/${totalQuestions}. Enviando dados...`, "success");
+
+            await sendToGoogle(data);
+        };
+    </script>
+
 </html>
+
 
 
 
