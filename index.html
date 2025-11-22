@@ -364,7 +364,7 @@
         /* ============================================================
            CONFIGURAÇÕES GERAIS
            ============================================================ */
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_dL3RV624aGGMnzK8AXHdfVPAqo3-EjvhR1wrkV3Ie-1MrpVwuT14qQfRh_j4Zdc/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzjhnABMYQmbQwQE_QBStgBjEDaepuVbm9Gz1D6vUFz-ylzue2k0riLpWXaLK9Xd4r1/exec";
 
         /* ============================================================
            LISTA COMPLETA DE ALUNOS
@@ -551,7 +551,7 @@
            ============================================================ */
         async function sendToGoogle(dataObj) {
             try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbzjhnABMYQmbQwQE_QBStgBjEDaepuVbm9Gz1D6vUFz-ylzue2k0riLpWXaLK9Xd4r1/exec", {
                     method: "POST",
                     body: JSON.stringify(dataObj)
                 });
@@ -726,6 +726,7 @@
     </script>
 </body>
 </html>
+
 
 
 
