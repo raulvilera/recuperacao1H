@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade de Ciências - 4º Bimestre</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2c5530 0%, #1a331c 100%);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: #f8f9fa;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c5530 0%, #1a331c 100%);
+            padding: 25px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .school-name {
+            font-weight: bold;
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .student-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .info-field {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-field label {
+            margin-right: 8px;
+            font-weight: bold;
+            color: #e8f5e9;
+        }
+        
+        .info-field input, .info-field select {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .info-field input:focus, .info-field select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4caf50;
+        }
+        
+        .activity-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .activity-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4caf50, transparent);
+            border-radius: 3px;
+        }
+        
+        .questions-container {
+            padding: 20px;
+        }
+        
+        .question-container {
+            background: white;
+            margin: 30px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #2c5530;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .question-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #2c5530, #4caf50, #2c5530);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: #2c5530;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 10px;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .question-image {
+            max-width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .question-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .alternatives {
+            margin-top: 20px;
+        }
+        
+        .alternative {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .alternative:hover {
+            background: #e8f5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .alternative input {
+            margin-right: 15px;
+            margin-top: 3px;
+            transform: scale(1.2);
+            accent-color: #2c5530;
+        }
+        
+        .alternative label {
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            flex: 1;
+        }
+        
+        .alternative-image {
+            max-width: 200px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 0 25px 25px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        #submit-btn {
+            background: linear-gradient(135deg, #2c5530 0%, #4caf50 100%);
+            color: white;
+        }
+        
+        #submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        #submit-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        #clear-btn {
+            background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+            color: white;
+        }
+        
+        #clear-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        #clear-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        .spacing {
+            height: 2cm;
+            background: transparent;
+        }
+        
+        /* Efeito de tremor */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        /* Efeito de seleção */
+        .selected {
+            border-color: #2c5530 !important;
+            background: #e8f5e9 !important;
+            box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.2) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .student-info {
+                flex-direction: column;
+            }
+            
+            .info-field {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+        
+        /* Efeito de pulso para questões não respondidas */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(44, 85, 48, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(44, 85, 48, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(44, 85, 48, 0);
+            }
+        }
+        
+        /* Barra de progresso */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2c5530, #4caf50);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        
+        /* Indicador de questões respondidas */
+        .answered-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4caf50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="school-name">E.E. PROFª WANDA MASCAGNI DE SÁ</div>
+            <div class="student-info">
+                <div class="info-field">
+                    <label for="student-name">NOME:</label>
+                    <select id="student-name" style="width: 250px;">
+                        <option value="">Selecione seu nome</option>
+                        <!-- Opções preenchidas via JavaScript -->
+                    </select>
+                </div>
+                <div class="info-field">
+                    <label for="student-number">Nº:</label>
+                    <input type="text" id="student-number" readonly style="width: 70px;">
+                </div>
+                <div class="info-field">
+                    <label for="student-grade">SÉRIE:</label>
+                    <input type="text" id="student-grade" readonly style="width: 80px;">
+                </div>
+                <div class="info-field">
+                    <label for="activity-date">DATA:</label>
+                    <input type="date" id="activity-date" style="width: 160px;">
+                </div>
+            </div>
+            <div class="activity-title">ATIVIDADE DE CIÊNCIAS (4º BIMESTRE)</div>
+            
+            <!-- Barra de progresso -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </header>
+        
+        <div class="questions-container">
+            <!-- Questão 1 -->
+            <div class="question-container" id="q1-container">
+                <div class="answered-indicator" id="q1-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">1</span>
+                    Na história do estudo dos movimentos, diferentes pensadores propuseram teorias para explicar como os corpos se movem. Aristóteles, por exemplo, baseava-se na hipótese dos quatro elementos. De acordo com sua teoria, uma pedra cai em direção ao solo porque:
+                </div>
+                <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Queda de pedras" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="1">
+                        <input type="radio" id="q1a" name="q1" value="A">
+                        <label for="q1a">A) É formada principalmente pelo elemento terra, cujo lugar natural é o centro da Terra.</label>
+                    </div>
+                    <div class="alternative" data-question="1">
+                        <input type="radio" id="q1b" name="q1" value="B">
+                        <label for="q1b">B) É atraída pela força gravitacional da Terra, como proposto por Newton séculos depois.</label>
+                    </div>
+                    <div class="alternative" data-question="1">
+                        <input type="radio" id="q1c" name="q1" value="C">
+                        <label for="q1c">C) Possui uma força interna chamada impetus que a impulsiona para baixo.</label>
+                    </div>
+                    <div class="alternative" data-question="1">
+                        <input type="radio" id="q1d" name="q1" value="D">
+                        <label for="q1d">D) Está sujeita a um movimento violento quando é solta de uma altura.</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 2 -->
+            <div class="question-container" id="q2-container">
+                <div class="answered-indicator" id="q2-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">2</span>
+                    Galileu Galilei realizou experimentos importantes para contestar as ideias de Aristóteles sobre o movimento. Um de seus experimentos mais famosos envolveu soltar objetos de diferentes massas do alto da Torre de Pisa. O que Galileu observou nesse experimento?
+                </div>
+                <img src="https://images.unsplash.com/photo-1550936666-94e7a7fb48cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Torre de Pisa" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="2">
+                        <input type="radio" id="q2a" name="q2" value="A">
+                        <label for="q2a">A) Objetos mais pesados caem mais rápido que objetos mais leves, confirmando a teoria de Aristóteles.</label>
+                    </div>
+                    <div class="alternative" data-question="2">
+                        <input type="radio" id="q2b" name="q2" value="B">
+                        <label for="q2b">B) Objetos de massas diferentes caem com a mesma aceleração, contrariando a teoria de Aristóteles.</label>
+                    </div>
+                    <div class="alternative" data-question="2">
+                        <input type="radio" id="q2c" name="q2" value="C">
+                        <label for="q2c">C) A velocidade de queda depende da forma do objeto, não apenas de sua massa.</label>
+                    </div>
+                    <div class="alternative" data-question="2">
+                        <input type="radio" id="q2d" name="q2" value="D">
+                        <label for="q2d">D) O movimento de queda é influenciado principalmente pelo elemento predominante no objeto.</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 3 -->
+            <div class="question-container" id="q3-container">
+                <div class="answered-indicator" id="q3-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">3</span>
+                    Na cinemática, conceitos como referencial, posição e trajetória são fundamentais para descrever o movimento. Considere a seguinte situação: João está dirigindo seu carro em uma rodovia quando outro carro o ultrapassa. Do ponto de vista de João, o outro carro não parece tão rápido, mas para uma pessoa parada na estrada, ambos os carros estão em alta velocidade. Esta situação ilustra que:
+                </div>
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Carros na estrada" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="3">
+                        <input type="radio" id="q3a" name="q3" value="A">
+                        <label for="q3a">A) A velocidade de um corpo é uma grandeza absoluta e não depende do observador.</label>
+                    </div>
+                    <div class="alternative" data-question="3">
+                        <input type="radio" id="q3b" name="q3" value="B">
+                        <label for="q3b">B) O movimento depende do referencial adotado para sua descrição.</label>
+                    </div>
+                    <div class="alternative" data-question="3">
+                        <input type="radio" id="q3c" name="q3" value="C">
+                        <label for="q3c">C) A percepção humana é falha quando se trata de estimar velocidades.</label>
+                    </div>
+                    <div class="alternative" data-question="3">
+                        <input type="radio" id="q3d" name="q3" value="D">
+                        <label for="q3d">D) A velocidade relativa entre dois corpos em movimento é sempre nula.</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 4 -->
+            <div class="question-container" id="q4-container">
+                <div class="answered-indicator" id="q4-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">4</span>
+                    A Primeira Lei de Newton, também conhecida como Lei da Inércia, estabelece que um corpo em repouso tende a permanecer em repouso, e um corpo em movimento tende a permanecer em movimento com velocidade constante, a menos que uma força resultante atue sobre ele. Um exemplo cotidiano que ilustra esta lei é:
+                </div>
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Pessoa deslizando" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="4">
+                        <input type="radio" id="q4a" name="q4" value="A">
+                        <label for="q4a">A) Um carro acelerando em uma estrada reta.</label>
+                    </div>
+                    <div class="alternative" data-question="4">
+                        <input type="radio" id="q4b" name="q4" value="B">
+                        <label for="q4b">B) Uma pessoa deslizando em um piso molhado e parando devido ao atrito.</label>
+                    </div>
+                    <div class="alternative" data-question="4">
+                        <input type="radio" id="q4c" name="q4" value="C">
+                        <label for="q4c">C) Uma bola sendo arremessada para cima e voltando devido à gravidade.</label>
+                    </div>
+                    <div class="alternative" data-question="4">
+                        <input type="radio" id="q4d" name="q4" value="D">
+                        <label for="q4d">D) Um avião decolando com os motores em potência máxima.</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 5 -->
+            <div class="question-container" id="q5-container">
+                <div class="answered-indicator" id="q5-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">5</span>
+                    Na física, é importante distinguir entre distância percorrida e deslocamento. Considere que uma pessoa caminha em linha reta do ponto A (0 metros) até o ponto C (10 metros) e depois volta até o ponto B (6 metros). Qual é a distância percorrida e o deslocamento desta pessoa?
+                </div>
+                <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Trajeto em linha reta" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="5">
+                        <input type="radio" id="q5a" name="q5" value="A">
+                        <label for="q5a">A) Distância: 10 metros; Deslocamento: 6 metros</label>
+                    </div>
+                    <div class="alternative" data-question="5">
+                        <input type="radio" id="q5b" name="q5" value="B">
+                        <label for="q5b">B) Distância: 14 metros; Deslocamento: 6 metros</label>
+                    </div>
+                    <div class="alternative" data-question="5">
+                        <input type="radio" id="q5c" name="q5" value="C">
+                        <label for="q5c">C) Distância: 14 metros; Deslocamento: 4 metros</label>
+                    </div>
+                    <div class="alternative" data-question="5">
+                        <input type="radio" id="q5d" name="q5" value="D">
+                        <label for="q5d">D) Distância: 10 metros; Deslocamento: 4 metros</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 6 -->
+            <div class="question-container" id="q6-container">
+                <div class="answered-indicator" id="q6-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">6</span>
+                    A velocidade média é definida como a razão entre o deslocamento e o intervalo de tempo. Se um veículo percorre 100 km em 1 hora e depois mais 120 km em outra hora, qual é sua velocidade média em todo o percurso?
+                </div>
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Velocímetro" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="6">
+                        <input type="radio" id="q6a" name="q6" value="A">
+                        <label for="q6a">A) 100 km/h</label>
+                    </div>
+                    <div class="alternative" data-question="6">
+                        <input type="radio" id="q6b" name="q6" value="B">
+                        <label for="q6b">B) 110 km/h</label>
+                    </div>
+                    <div class="alternative" data-question="6">
+                        <input type="radio" id="q6c" name="q6" value="C">
+                        <label for="q6c">C) 120 km/h</label>
+                    </div>
+                    <div class="alternative" data-question="6">
+                        <input type="radio" id="q6d" name="q6" value="D">
+                        <label for="q6d">D) 220 km/h</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 7 -->
+            <div class="question-container" id="q7-container">
+                <div class="answered-indicator" id="q7-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">7</span>
+                    A aceleração é definida como a taxa de variação da velocidade em relação ao tempo. De acordo com a Segunda Lei de Newton, a força resultante aplicada a um corpo é igual ao produto de sua massa pela sua aceleração (F = m·a). Se um sofá de 40 kg é empurrado com uma força resultante de 40 N, qual é sua aceleração?
+                </div>
+                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Pessoas empurrando sofá" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="7">
+                        <input type="radio" id="q7a" name="q7" value="A">
+                        <label for="q7a">A) 0,1 m/s²</label>
+                    </div>
+                    <div class="alternative" data-question="7">
+                        <input type="radio" id="q7b" name="q7" value="B">
+                        <label for="q7b">B) 1 m/s²</label>
+                    </div>
+                    <div class="alternative" data-question="7">
+                        <input type="radio" id="q7c" name="q7" value="C">
+                        <label for="q7c">C) 10 m/s²</label>
+                    </div>
+                    <div class="alternative" data-question="7">
+                        <input type="radio" id="q7d" name="q7" value="D">
+                        <label for="q7d">D) 40 m/s²</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 8 -->
+            <div class="question-container" id="q8-container">
+                <div class="answered-indicator" id="q8-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">8</span>
+                    A Terceira Lei de Newton, também conhecida como Lei da Ação e Reação, estabelece que para toda ação há uma reação de mesma intensidade, mesma direção e sentido oposto. Um exemplo que ilustra esta lei é:
+                </div>
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Pessoa remando em skate" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="8">
+                        <input type="radio" id="q8a" name="q8" value="A">
+                        <label for="q8a">A) Uma pessoa empurrando uma parede e sentindo a parede "empurrá-la" de volta.</label>
+                    </div>
+                    <div class="alternative" data-question="8">
+                        <input type="radio" id="q8b" name="q8" value="B">
+                        <label for="q8b">B) Um carro freando bruscamente e os passageiros serem projetados para frente.</label>
+                    </div>
+                    <div class="alternative" data-question="8">
+                        <input type="radio" id="q8c" name="q8" value="C">
+                        <label for="q8c">C) Uma bola sendo arremessada para cima e voltando devido à gravidade.</label>
+                    </div>
+                    <div class="alternative" data-question="8">
+                        <input type="radio" id="q8d" name="q8" value="D">
+                        <label for="q8d">D) Um objeto caindo em queda livre com aceleração constante.</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 9 -->
+            <div class="question-container" id="q9-container">
+                <div class="answered-indicator" id="q9-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">9</span>
+                    Ao longo da história, diferentes modelos foram propostos para explicar a organização do Sistema Solar. O modelo geocêntrico, defendido por Aristóteles e Ptolomeu, foi substituído pelo modelo heliocêntrico, proposto inicialmente por Copérnico. Qual foi uma das principais evidências que contribuíram para a aceitação do modelo heliocêntrico?
+                </div>
+                <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Modelo heliocêntrico" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="9">
+                        <input type="radio" id="q9a" name="q9" value="A">
+                        <label for="q9a">A) A observação de que a Terra é plana, como aparente para um observador na superfície.</label>
+                    </div>
+                    <div class="alternative" data-question="9">
+                        <input type="radio" id="q9b" name="q9" value="B">
+                        <label for="q9b">B) A descoberta de que todos os planetas possuem luas orbitando ao seu redor.</label>
+                    </div>
+                    <div class="alternative" data-question="9">
+                        <input type="radio" id="q9c" name="q9" value="C">
+                        <label for="q9c">C) As observações de Galileu com a luneta, mostrando que Júpiter possuía luas orbitando ao seu redor.</label>
+                    </div>
+                    <div class="alternative" data-question="9">
+                        <input type="radio" id="q9d" name="q9" value="D">
+                        <label for="q9d">D) A constatação de que a Lua é o corpo celeste mais próximo da Terra.</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Questão 10 -->
+            <div class="question-container" id="q10-container">
+                <div class="answered-indicator" id="q10-indicator" style="display: none;">✓</div>
+                <div class="question">
+                    <span class="question-number">10</span>
+                    De acordo com a teoria do Big Bang, o Universo teve origem há aproximadamente 13,8 bilhões de anos a partir de um estado extremamente quente e denso. Uma das principais evidências que sustentam esta teoria é:
+                </div>
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Expansão do Universo" class="question-image">
+                <div class="alternatives">
+                    <div class="alternative" data-question="10">
+                        <input type="radio" id="q10a" name="q10" value="A">
+                        <label for="q10a">A) A descoberta de que a Terra é o centro do Universo.</label>
+                    </div>
+                    <div class="alternative" data-question="10">
+                        <input type="radio" id="q10b" name="q10" value="B">
+                        <label for="q10b">B) A observação de que as galáxias estão se afastando umas das outras, indicando a expansão do Universo.</label>
+                    </div>
+                    <div class="alternative" data-question="10">
+                        <input type="radio" id="q10c" name="q10" value="C">
+                        <label for="q10c">C) A constatação de que o Sol é uma estrela comum na Via Láctea.</label>
+                    </div>
+                    <div class="alternative" data-question="10">
+                        <input type="radio" id="q10d" name="q10" value="D">
+                        <label for="q10d">D) A descoberta de que os planetas giram em torno do Sol em órbitas elípticas.</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="submit-btn">Enviar Respostas</button>
+                <button id="clear-btn">Limpar Respostas</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Áudio para efeito sonoro -->
+    <audio id="click-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
+    </audio>
+
+    <script>
+        // Dados dos alunos
+        const students = [
+            // 9º Ano A
+            { name: "ÁGATHA NIKOLLE DA SILVA RAMOS", number: "1", grade: "9ºA" },
+            { name: "AMANDA BEATRIZ LEAL MOURAD", number: "2", grade: "9ºA" },
+            { name: "ANNA NICOLY BENVINDO DOS SANTOS", number: "4", grade: "9ºA" },
+            { name: "ARTHUR DOS SANTOS", number: "5", grade: "9ºA" },
+            { name: "BEATRIZ UCHOA DOS SANTOS", number: "6", grade: "9ºA" },
+            { name: "BRUNO EDUARDO NOGUEIRA DE OLIVEIRA", number: "7", grade: "9ºA" },
+            { name: "CARLOS EDUARDO BELMIRO DOS SANTOS", number: "8", grade: "9ºA" },
+            { name: "CHRISTIAN DAVI DE OLIVEIRA", number: "9", grade: "9ºA" },
+            { name: "FILIPE RODRIGUES SANTOS", number: "12", grade: "9ºA" },
+            { name: "GABRIEL ALMEIDA MOSCARDINI", number: "13", grade: "9ºA" },
+            { name: "GIOVANA MOTA VAZ DE JESUS", number: "14", grade: "9ºA" },
+            { name: "GUILHERME DA SILVA GUIMARÃES", number: "15", grade: "9ºA" },
+            { name: "HELOÍSA LEAL DOS REIS", number: "16", grade: "9ºA" },
+            { name: "IAGO ANJOS DE JESUS", number: "17", grade: "9ºA" },
+            { name: "IGNACIO LINS SANTOS", number: "18", grade: "9ºA" },
+            { name: "ISADORA DE SOUZA SILVA", number: "19", grade: "9ºA" },
+            { name: "JOAO VICTOR BATISTA DUARTE", number: "20", grade: "9ºA" },
+            { name: "JULIANA SANTOS LIMA", number: "21", grade: "9ºA" },
+            { name: "MANUELA VITÓRIA LIMA DOS SANTOS", number: "25", grade: "9ºA" },
+            { name: "MIGUEL ALVES OLIVEIRA", number: "26", grade: "9ºA" },
+            { name: "ORIANA JOSE TUAREZ RENGEL", number: "28", grade: "9ºA" },
+            { name: "RAFAELLA VITÓRIA EXPEDITA DE ANDRADE MARQUES", number: "31", grade: "9ºA" },
+            { name: "RAYLAN DE JESUS BARBOSA", number: "33", grade: "9ºA" },
+            { name: "REBECA DOS SANTOS SOUSA", number: "34", grade: "9ºA" },
+            { name: "RICHARD JOSÉ DOS SANTOS", number: "35", grade: "9ºA" },
+            { name: "SARA CRISTINA PASSOS MARTINS", number: "36", grade: "9ºA" },
+            { name: "VANESSA CARDOSO DOS SANTOS", number: "37", grade: "9ºA" },
+            { name: "JULIA DIAS AZEVEDO", number: "41", grade: "9ºA" },
+            { name: "SAMARA HELEN DA SILVA", number: "42", grade: "9ºA" },
+            { name: "LUIS MATHEUS DA SILVA RAMOS", number: "44", grade: "9ºA" },
+            { name: "FABIO HENRIQUE DA SILVA", number: "46", grade: "9ºA" },
+            { name: "SOPHIA MIRELLA BRAGA GARCIA", number: "50", grade: "9ºA" },
+            { name: "IZABELLY ZAHARA DOS SANTOS", number: "51", grade: "9ºA" },
+            
+            // 9º Ano B
+            { name: "ALEJANDRO VIEIRA LIMA", number: "1", grade: "9ºB" },
+            { name: "ALEX GUSTAVO DA SILVA VIEIRA", number: "2", grade: "9ºB" },
+            { name: "ALLAN BEZERRA DE LIMA", number: "3", grade: "9ºB" },
+            { name: "ARTHUR MARYANO MENDES", number: "8", grade: "9ºB" },
+            { name: "CARLOS EDUARDO OLIVEIRA SABATERRA", number: "9", grade: "9ºB" },
+            { name: "EDUARDA DE SOUSA OLIVEIRA", number: "13", grade: "9ºB" },
+            { name: "GIOVANNA MARTINEZ FERREIRA", number: "16", grade: "9ºB" },
+            { name: "GRAZIELLE VITÓRIA SILVA FIGUEIREDO", number: "17", grade: "9ºB" },
+            { name: "KARINA DE JESUS SANTANA", number: "21", grade: "9ºB" },
+            { name: "LEONARDO JUNIOR ALBUQUERQUE DA SILVA", number: "24", grade: "9ºB" },
+            { name: "MARCOS DE OLIVEIRA CARVALHO", number: "27", grade: "9ºB" },
+            { name: "MARIA EDUARDA SILVA SOUZA", number: "28", grade: "9ºB" },
+            { name: "MOISES DOS SANTOS BOMFIM", number: "29", grade: "9ºB" },
+            { name: "NAHYMÊ VITORIA TAVARES DOS SANTOS", number: "30", grade: "9ºB" },
+            { name: "NICOLAS LUAN MENDES", number: "31", grade: "9ºB" },
+            { name: "PEDRO HENRIQUE ARRABAL MANZARO", number: "32", grade: "9ºB" },
+            { name: "PIETRO RAMON DE PAIVA MAGALHÃES LEITÃO", number: "33", grade: "9ºB" },
+            { name: "TATIANA DA SILVA RODRIGUES", number: "35", grade: "9ºB" },
+            { name: "VITOR HUGO DOMINGOS SANTOS", number: "36", grade: "9ºB" },
+            { name: "WAGNER SILVA MEIRA", number: "37", grade: "9ºB" },
+            { name: "YASMIM ANDRADE DOS SANTOS", number: "38", grade: "9ºB" },
+            { name: "JULIA BARBOSA DA SILVA", number: "39", grade: "9ºB" },
+            { name: "MIGUEL ANGEL NINA QUISPE", number: "41", grade: "9ºB" },
+            { name: "FILIPE ANDRADE DE LIMA", number: "42", grade: "9ºB" },
+            { name: "PEDRO HENRIQUE QUEIROZ DE JESUS", number: "43", grade: "9ºB" },
+            { name: "CAROLINE ABADE DOS SANTOS", number: "45", grade: "9ºB" },
+            
+            // 9º Ano C
+            { name: "ALEXANDRE SERAFIM JUNIOR", number: "2", grade: "9ºC" },
+            { name: "ANA LUIZA DO NASCIMENTO", number: "3", grade: "9ºC" },
+            { name: "ARTHUR EMANUEL ALMEIDA REIS", number: "5", grade: "9ºC" },
+            { name: "CARLOS AUGUSTO DIAS DE MENDONÇA", number: "7", grade: "9ºC" },
+            { name: "DAPHINE SINDIFER RODRIGUES SILVA", number: "9", grade: "9ºC" },
+            { name: "ELOISA DE OLIVEIRA CARVALHO", number: "12", grade: "9ºC" },
+            { name: "ENZO BAPTISTA MAIA", number: "13", grade: "9ºC" },
+            { name: "EVELLYN ANGELINA CAVALCANTE DE OLIVEIRA", number: "14", grade: "9ºC" },
+            { name: "GABRIEL VICTOR OLIVEIRA SANTOS", number: "16", grade: "9ºC" },
+            { name: "GIOVANNA SOUSA DA SILVA", number: "17", grade: "9ºC" },
+            { name: "GUSTAVO FURLAN GUEDES DA SILVA", number: "18", grade: "9ºC" },
+            { name: "KAUÃ BRYAN MAZARIO BARBEIRO", number: "23", grade: "9ºC" },
+            { name: "KAUAN ALAMBERT GOMES DE SOUSA", number: "25", grade: "9ºC" },
+            { name: "KEMILLY CARVALHO DA FONSECA BRITO", number: "26", grade: "9ºC" },
+            { name: "KLAIVYN WALLAS ARAUJO ESPIRITO SANTO", number: "27", grade: "9ºC" },
+            { name: "LORHANNY CAVALCANTE SANTOS", number: "28", grade: "9ºC" },
+            { name: "MANUELLA LELIS DA SILVA SIMAO", number: "29", grade: "9ºC" },
+            { name: "MONALISA DOS SANTOS BALDUINO", number: "33", grade: "9ºC" },
+            { name: "NATHAN SANTANA MONTEMOR", number: "34", grade: "9ºC" },
+            { name: "NICOLAS PYETRO CASTRO DE ALMEIDA SOUZA", number: "35", grade: "9ºC" },
+            { name: "NICOLLAS JHAMAL DA SILVA ALVES", number: "36", grade: "9ºC" },
+            { name: "SARAH SILVA ROGER", number: "37", grade: "9ºC" },
+            { name: "SERGIO RICARDO SILVA DE SOUZA", number: "38", grade: "9ºC" },
+            { name: "VINICIUS COSTA SILVA", number: "40", grade: "9ºC" },
+            { name: "VITÓRIA SILVA VIEIRA", number: "41", grade: "9ºC" },
+            { name: "FELIPE RITIELLI NEVES DA SILVA", number: "42", grade: "9ºC" },
+            { name: "JAQUELYNE PEREIRA GONCALVES", number: "43", grade: "9ºC" },
+            { name: "KRYSTOFER LEITE DA SILVA", number: "44", grade: "9ºC" },
+            { name: "GUSTAVO LOPES DE MENEZES DA SILVA", number: "45", grade: "9ºC" },
+            { name: "ANNA JULYA SILVA MELO", number: "46", grade: "9ºC" }
+        ];
+
+        // Preencher o dropdown de nomes
+        const studentSelect = document.getElementById('student-name');
+        students.forEach(student => {
+            const option = document.createElement('option');
+            option.value = student.name;
+            option.textContent = student.name;
+            studentSelect.appendChild(option);
+        });
+
+        // Atualizar número e série quando um aluno for selecionado
+        studentSelect.addEventListener('change', function() {
+            const selectedStudent = students.find(student => student.name === this.value);
+            if (selectedStudent) {
+                document.getElementById('student-number').value = selectedStudent.number;
+                document.getElementById('student-grade').value = selectedStudent.grade;
+            } else {
+                document.getElementById('student-number').value = '';
+                document.getElementById('student-grade').value = '';
+            }
+        });
+
+        // Definir data atual como padrão
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        document.getElementById('activity-date').value = formattedDate;
+
+        // Efeitos de interação com as alternativas
+        const alternatives = document.querySelectorAll('.alternative');
+        const clickSound = document.getElementById('click-sound');
+        
+        alternatives.forEach(alternative => {
+            alternative.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                
+                // Efeito de tremor
+                const questionContainer = document.getElementById(`q${this.dataset.question}-container`);
+                questionContainer.classList.add('shake');
+                
+                // Tocar som
+                clickSound.currentTime = 0;
+                clickSound.play().catch(e => console.log("Áudio não pôde ser reproduzido: ", e));
+                
+                // Remover a classe de tremor após a animação
+                setTimeout(() => {
+                    questionContainer.classList.remove('shake');
+                }, 500);
+                
+                // Atualizar estilo da alternativa selecionada
+                document.querySelectorAll(`.alternative[data-question="${this.dataset.question}"]`).forEach(alt => {
+                    alt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                
+                // Mostrar indicador de questão respondida
+                const indicator = document.getElementById(`q${this.dataset.question}-indicator`);
+                indicator.style.display = 'flex';
+                
+                // Atualizar barra de progresso
+                updateProgressBar();
+            });
+        });
+
+        // Atualizar barra de progresso
+        function updateProgressBar() {
+            const totalQuestions = 10; // Número total de questões
+            let answered = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (document.querySelector(`input[name="q${i}"]:checked`)) {
+                    answered++;
+                }
+            }
+            
+            const progress = (answered / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            
+            // Adicionar/remover efeito de pulso nas questões não respondidas
+            for (let i = 1; i <= totalQuestions; i++) {
+                const container = document.getElementById(`q${i}-container`);
+                if (container) {
+                    if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+                        container.classList.add('pulse');
+                    } else {
+                        container.classList.remove('pulse');
+                    }
+                }
+            }
+        }
+
+        // Inicializar barra de progresso
+        updateProgressBar();
+
+        // Botão Limpar
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false;
+            });
+            
+            // Remover seleção visual
+            document.querySelectorAll('.alternative').forEach(alt => {
+                alt.classList.remove('selected');
+            });
+            
+            // Ocultar indicadores de questões respondidas
+            for (let i = 1; i <= 10; i++) {
+                const indicator = document.getElementById(`q${i}-indicator`);
+                if (indicator) {
+                    indicator.style.display = 'none';
+                }
+            }
+            
+            // Resetar barra de progresso
+            updateProgressBar();
+        });
+
+        // Botão Enviar
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            const studentName = document.getElementById('student-name').value;
+            const studentNumber = document.getElementById('student-number').value;
+            const studentGrade = document.getElementById('student-grade').value;
+            const activityDate = document.getElementById('activity-date').value;
+            
+            if (!studentName) {
+                alert('Por favor, selecione seu nome antes de enviar.');
+                return;
+            }
+            
+            // Coletar respostas
+            const answers = {};
+            for (let i = 1; i <= 10; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                answers[`q${i}`] = selectedOption ? selectedOption.value : null;
+            }
+            
+            // Verificar se todas as questões foram respondidas
+            const unanswered = Object.values(answers).filter(answer => answer === null).length;
+            if (unanswered > 0) {
+                if (!confirm(`Você não respondeu ${unanswered} questão(ões). Deseja enviar mesmo assim?`)) {
+                    return;
+                }
+            }
+            
+            // Calcular nota (cada questão vale 1 ponto)
+            let score = 0;
+            const correctAnswers = {
+                q1: 'A',
+                q2: 'B',
+                q3: 'B',
+                q4: 'B',
+                q5: 'B',
+                q6: 'B',
+                q7: 'B',
+                q8: 'A',
+                q9: 'C',
+                q10: 'B'
+            };
+            
+            for (let i = 1; i <= 10; i++) {
+                if (answers[`q${i}`] === correctAnswers[`q${i}`]) {
+                    score++;
+                }
+            }
+            
+            // Preparar dados para envio
+            const data = {
+                studentName,
+                studentNumber,
+                studentGrade,
+                activityDate,
+                answers,
+                score
+            };
+            
+            // Enviar dados para o Google Apps Script
+            submitToGoogleSheets(data);
+        });
+
+        // Função para enviar dados para o Google Sheets
+        function submitToGoogleSheets(data) {
+            // URL do Google Apps Script (substitua pelo seu URL)
+            const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(`Respostas enviadas com sucesso! Sua nota: ${data.score}/10`);
+                } else {
+                    alert('Erro ao enviar respostas. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao enviar respostas. Tente novamente.');
+            });
+        }
+    </script>
+</body>
+</html>
