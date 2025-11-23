@@ -640,14 +640,25 @@
                     body: JSON.stringify(dataObj)
                 });
 
-                if (!response.ok) {
-                    throw new Error(`Erro HTTP: ${response.status} ${response.statusText}`);
+                // Tenta ler a resposta como JSON, mesmo que haja erro HTTP, para obter a mensagem do Apps Script
+                let json;
+                try {
+                    json = await response.json();
+                } catch (e) {
+                    // Se não for JSON, pode ser um erro de rede ou CORS antes de chegar ao Apps Script
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP: ${response.status} ${response.statusText}. Não foi possível ler a resposta do servidor.`);
+                    }
+                    // Se a resposta for OK, mas não for JSON, é um erro inesperado
+                    throw new Error("Resposta do servidor em formato inesperado.");
                 }
 
-                const json = await response.json();
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status} ${response.statusText}. Mensagem do servidor: ${json.message || 'Nenhuma'}`);
+                }
 
                 if (json.status === "success") {
-                    showResult(`<strong>Sucesso!</strong> Dados enviados e registrados. Sua pontuação: ${dataObj.finalScore}/10 (${dataObj.percentage}%)`, "success");
+                    showResult(`<strong>Sucesso!</strong> Dados enviados e registrados. Sua pontuação: ${dataObj.finalScore}/10 (${dataObj.percentage.toFixed(2)}%)`, "success");
                     document.getElementById("submitBtn").disabled = true;
                 } else {
                     showResult(
@@ -657,7 +668,7 @@
                 }
             } catch (e) {
                 showResult(
-                    "<strong>Erro de Conexão:</strong> " + e.message + ". Verifique sua conexão com a internet.",
+                    "<strong>Erro de Conexão:</strong> " + e.message + ". Verifique sua conexão com a internet e se o Apps Script foi publicado corretamente.",
                     "error"
                 );
             }
@@ -826,6 +837,3 @@
     </script>
 </body>
 </html>
-
-
-
